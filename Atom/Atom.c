@@ -146,7 +146,7 @@ extern void Atom_vload(const char *str, ...) {
 
 extern void Atom_aload(const char *strs[]) {
     assert(strs);
-    for (char * str = *strs; str; ++str) {
+    for (char * str = (char *)*strs; str; ++str) {
         Atom_string(str);
     }
 }
@@ -172,7 +172,7 @@ extern const char * Atom_add(const char *str, int len) {
         }
     p = ALLOC(sizeof(*p));
     p->len = len;
-    p->str = str;
+    p->str = (char *)str;
     p->isconst = true;
 
     p->link = buckets[h];
