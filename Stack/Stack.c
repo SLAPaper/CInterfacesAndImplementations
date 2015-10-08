@@ -37,7 +37,7 @@ void Stack_push(T stk, void *x) {
     t->x = x;
     t->link = stk->head;
     stk->head = t;
-    stk->count++;
+    ++(stk->count);
 }
 
 void * Stack_pop(T stk) {
@@ -48,7 +48,7 @@ void * Stack_pop(T stk) {
     assert(stk->count > 0);
     t = stk->head;
     stk->head = t->link;
-    stk->count--;
+    --(stk->count);
     x = t->x;
     FREE(t);
     return x;

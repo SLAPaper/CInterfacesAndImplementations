@@ -53,14 +53,14 @@ const char * Atom_new(const char *str, int len) {
 
     unsigned long h;
     int i;
-    for (h = 0, i = 0; i < len; i++)
+    for (h = 0, i = 0; i < len; ++i)
         h = (h << 1) + scatter[(unsigned char)str[i]];
     h %= NELEMS(buckets);
 
     struct atom *p;
     for (p = buckets[h]; p; p = p->link)
         if (len == p->len) {
-            for (i = 0; i < len && p->str[i] == str[i]; i++)
+            for (i = 0; i < len && p->str[i] == str[i]; ++i)
                 ;
             if (i == len)
                 return p->str;
@@ -87,7 +87,7 @@ int Atom_length(const char *str) {
 
     int i;
     unsigned long h;
-    for (h = 0, i = 0; i < len; i++)
+    for (h = 0, i = 0; i < len; ++i)
         h = (h << 1) + scatter[(unsigned char)str[i]];
     h %= NELEMS(buckets);
 
@@ -106,7 +106,7 @@ extern void Atom_free(const char *str) {
 
     int i;
     unsigned long h;
-    for (h = 0, i = 0; i < len; i++)
+    for (h = 0, i = 0; i < len; ++i)
         h = (h << 1) + scatter[(unsigned char)str[i]];
     h %= NELEMS(buckets);
 
@@ -158,14 +158,14 @@ extern const char * Atom_add(const char *str, int len) {
 
     unsigned long h;
     int i;
-    for (h = 0, i = 0; i < len; i++)
+    for (h = 0, i = 0; i < len; ++i)
         h = (h << 1) + scatter[(unsigned char)str[i]];
     h %= NELEMS(buckets);
 
     struct atom *p;
     for (p = buckets[h]; p; p = p->link)
         if (len == p->len) {
-            for (i = 0; i < len && p->str[i] == str[i]; i++)
+            for (i = 0; i < len && p->str[i] == str[i]; ++i)
                 ;
             if (i == len)
                 return p->str;
