@@ -1,3 +1,4 @@
+#ifndef CHKENABLED
 #include <stdlib.h>
 #include <stddef.h>
 #include "../Assert/Assert.h"
@@ -47,7 +48,7 @@ void * Mem_resize(void *ptr, long nbytes, const char *file, int line) {
     assert(nbytes > 0);
 
     ptr = realloc(ptr, nbytes);
-    if (ptr == NULL) { 
+    if (ptr == NULL) {
         if (file == NULL)
             RAISE(Mem_Failed);
         else {
@@ -56,3 +57,4 @@ void * Mem_resize(void *ptr, long nbytes, const char *file, int line) {
     }
     return ptr;
 }
+#endif

@@ -1,3 +1,4 @@
+#ifdef CHKENABLED
 #include <stdlib.h>
 #include <string.h>
 #include "../Assert/Assert.h"
@@ -134,3 +135,4 @@ void * Mem_alloc(long nbytes, const char *file, int line) {
     assert(0);
     return NULL;
 }
+#endif
