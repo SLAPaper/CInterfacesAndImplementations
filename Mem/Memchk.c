@@ -131,6 +131,12 @@ void * Mem_alloc(long nbytes, const char *file, int line) {
             newptr->free = freelist.free;
             freelist.free = newptr;
         }
+        // exercise 5.2
+        if (bp->free->size == sizeof(union align)) {
+            struct descriptor *temp = bp->free;
+            bp->free = temp->free;
+            temp->free = NULL;
+        }
     }
     assert(0);
     return NULL;
