@@ -8,10 +8,10 @@
 extern const Except_T Mem_Failed;
 
 //funcions 51
-extern void * Mem_alloc(long nbytes, const char * file, int line);
-extern void * Mem_calloc(long count, long nbytes, const char * file, int line);
-extern void Mem_free(void * ptr, const char * file, int line);
-extern void * Mem_resize(void * ptr, long nbytes, const char * file, int line);
+extern void * Mem_alloc(long nbytes, const char *file, int line);
+extern void * Mem_calloc(long count, long nbytes, const char *file, int line);
+extern void Mem_free(void *ptr, const char *file, int line);
+extern void * Mem_resize(void *ptr, long nbytes, const char *file, int line);
 
 //macros 51
 #define ALLOC(nbytes) Mem_alloc((nbytes), __FILE__, __LINE__)

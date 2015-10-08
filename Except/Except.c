@@ -5,10 +5,10 @@
 
 #define T Except_T
 
-Except_Frame * Except_Stack = NULL;
+Except_Frame *Except_Stack = NULL;
 
-void Except_raise(const T * e, const char * file, int line) {
-    Except_Frame * p = Except_stack;
+void Except_raise(const T *e, const char *file, int line) {
+    Except_Frame *p = Except_stack;
 
     assert(e);
     if (p == NULL) {
