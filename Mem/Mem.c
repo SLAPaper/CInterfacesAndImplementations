@@ -63,4 +63,9 @@ FILE *log_file = NULL;
 void Mem_log(FILE *log) {
 
 }
+
+// excercise 5.5
+void Mem_leak(void apply(const void *ptr, long size, const char *file, int line, void *cl), void *cl) {
+
+}
 #endif

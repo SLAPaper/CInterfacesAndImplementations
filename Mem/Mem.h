@@ -16,6 +16,8 @@ extern void * Mem_resize(void *ptr, long nbytes, const char *file, int line);
 // excercise 5.4
 extern FILE *log_file;
 extern void Mem_log(FILE *log);
+// excercise 5.5
+extern void Mem_leak(void apply(const void *ptr, long size, const char *file, int line, void *cl), void *cl);
 
 //macros 51
 #define ALLOC(nbytes) Mem_alloc((nbytes), __FILE__, __LINE__)

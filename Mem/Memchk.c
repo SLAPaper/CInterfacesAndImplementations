@@ -35,7 +35,7 @@ static struct descriptor
     long size;
     const char *file;
     int line;
-} *htab[2048];
+} *htab[2039];
 
 static struct descriptor freelist = { &freelist };
 
@@ -161,5 +161,18 @@ void * Mem_alloc(long nbytes, const char *file, int line) {
 FILE *log_file = NULL;
 void Mem_log(FILE *log) {
     log_file = log;
+}
+
+// excercise 5.5
+void Mem_leak(void apply(const void *ptr, long size, const char *file, int line, void *cl), void *cl) {
+    for (int i = 0; i < sizeof(htab) / sizeof(htab[0]); ++i) {
+        if (htab[i]) {
+            for (struct descriptor *bp = htab[i]; bp; bp = bp->link) {
+                if (!(bp->free)) {
+                    apply(bp->ptr, bp->size, bp->file, bp->line, cl);
+                }
+            }
+        }
+    }
 }
 #endif
