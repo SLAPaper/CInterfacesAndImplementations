@@ -19,7 +19,7 @@ union align {
 };
 
 //checking macros 58
-#define hash(p, t) (((unsigned long)(p) >> 3) & (sizeof(t) / sizeof((t)[0]) - 1))
+#define hash(p, t) (((unsigned long long)(p) >> 3) & (sizeof(t) / sizeof((t)[0]) - 1))
 #define NDESCRIPTORS 512
 #define NALLOC ((4096 + sizeof(union align) -1 ) / (sizeof(union align))) * (sizeof(union align))
 
@@ -51,8 +51,16 @@ static struct descriptor * find(const void *ptr) {
 void Mem_free(void *ptr, const char *file, int line) {
     if (ptr) {
         struct descriptor *bp = find(ptr);
-        if (((unsigned long)ptr) % (sizeof(union align)) != 0 || bp == NULL || bp->free)
-            Except_raise(&Assert_Failed, file, line);
+        if (((unsigned long long)ptr) % (sizeof(union align)) != 0 || bp == NULL || bp->free) {
+            if (log_file) {
+                fprintf(log_file, "** freeing free memory\n"
+                    "Mem_free(0x%p) called from %s:%d\n"
+                    "This block is %d bytes long and was allocated from %s:%d\n", \
+                    ptr, file, line, bp->size, bp->file, bp->line);
+            }
+            else
+                Except_raise(&Assert_Failed, file, line);
+        }
         bp->free = freelist.free;
         freelist.free = bp;
     }
@@ -63,8 +71,15 @@ void * Mem_resize(void *ptr, long nbytes, const char *file, int line) {
     assert(nbytes > 0);
 
     struct descriptor *bp = find(ptr);
-    if (((unsigned long)ptr) % (sizeof(union align)) != 0 || bp == NULL || bp->free)
-        Except_raise(&Assert_Failed, file, line);
+    if (((unsigned long long)ptr) % (sizeof(union align)) != 0 || bp == NULL || bp->free) {
+        if (log_file) {
+            fprintf(log_file, "** resizing unallocated memory\n"
+                "Mem_resize(0x%p, %ld) called from %s:%d\n", \
+                ptr, nbytes, file, line);
+        }
+        else
+            Except_raise(&Assert_Failed, file, line);
+    }
     void *newptr = Mem_alloc(nbytes, file, line);
     memcpy(newptr, ptr, nbytes < bp->size ? nbytes : bp->size);
     Mem_free(ptr, file, line);
@@ -140,5 +155,11 @@ void * Mem_alloc(long nbytes, const char *file, int line) {
     }
     assert(0);
     return NULL;
+}
+
+// excercise 5.4
+FILE *log_file = NULL;
+void Mem_log(FILE *log) {
+    log_file = log;
 }
 #endif

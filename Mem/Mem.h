@@ -3,6 +3,7 @@
 #define MEM_INCLUDED
 
 #include "../Except/Except.h"
+#include <stdio.h>
 
 //exceptions 51
 extern const Except_T Mem_Failed;
@@ -12,6 +13,9 @@ extern void * Mem_alloc(long nbytes, const char *file, int line);
 extern void * Mem_calloc(long count, long nbytes, const char *file, int line);
 extern void Mem_free(void *ptr, const char *file, int line);
 extern void * Mem_resize(void *ptr, long nbytes, const char *file, int line);
+// excercise 5.4
+extern FILE *log_file;
+extern void Mem_log(FILE *log);
 
 //macros 51
 #define ALLOC(nbytes) Mem_alloc((nbytes), __FILE__, __LINE__)

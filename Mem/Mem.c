@@ -57,4 +57,10 @@ void * Mem_resize(void *ptr, long nbytes, const char *file, int line) {
     }
     return ptr;
 }
+
+// excercise 5.4
+FILE *log_file = NULL;
+void Mem_log(FILE *log) {
+
+}
 #endif
