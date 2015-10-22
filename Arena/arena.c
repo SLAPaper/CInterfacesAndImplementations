@@ -62,6 +62,15 @@ void * Arena_alloc(T arena, long nbytes, const char *file, int line) {
     assert(nbytes > 0);
 
     nbytes = ((nbytes + sizeof(union align) - 1) / sizeof(union align)) * sizeof(union align);
+    
+    // Exercise 6.1
+    // Go throgh other arenas
+    T arena_temp = arena;
+    while (arena_temp && nbytes > arena_temp->limit - arena_temp->avail)
+        arena_temp = arena_temp->prev;
+    if (arena_temp)
+        arena = arena_temp;
+
     while (nbytes > arena->limit - arena->avail) {
         T ptr;
         char *limit;
@@ -115,4 +124,5 @@ void Arena_free(T arena) {
     assert(arena->limit == NULL);
     assert(arena->avail == NULL);
 }
+
 #undef T
