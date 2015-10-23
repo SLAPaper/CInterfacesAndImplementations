@@ -40,6 +40,46 @@ union header {
 static T freechunks;
 static int nfree;
 
+// Exercise 6.2
+// Descend order
+static int Arena_compare(const void *arena1, const void *arena2) {
+    const struct T *arena1_t = arena1;
+    const struct T *arena2_t = arena2;
+    long long result = arena1_t->avail - arena1_t->limit - (arena2_t->avail - arena2_t->limit);
+    if (result > 0)
+        return -1;
+    else if (result < 0)
+        return 1;
+    else
+        return 0;
+}
+
+static int Arena_count(T arena) {
+    int count = 0;
+    while (arena) {
+        ++count;
+        arena = arena->prev;
+    }
+    return count;
+}
+
+static void Arena_sort(T *arena) {
+    int n = Arena_count(*arena);
+    T *arraylist = calloc(n, sizeof(T));
+
+    T ptr = *arena;
+    for (int i = 0; i < n; ++i, ptr = ptr->prev) {
+        arraylist[i] = ptr;
+    }
+    qsort(arraylist, n, sizeof(T), Arena_compare);
+    *arena = arraylist[0];
+    for (int i = 1; i < n; ++i) {
+        arraylist[i - 1]->prev = arraylist[i];
+    }
+    arraylist[n - 1]->prev = NULL;
+    free(arraylist);
+}
+
 //functions 68
 T Arena_new(void) {
     T arena = malloc(sizeof(*arena));
@@ -62,16 +102,22 @@ void * Arena_alloc(T arena, long nbytes, const char *file, int line) {
     assert(nbytes > 0);
 
     nbytes = ((nbytes + sizeof(union align) - 1) / sizeof(union align)) * sizeof(union align);
-    
+
     // Exercise 6.1
     // Go throgh other arenas
+    /*
     T arena_temp = arena;
     while (arena_temp && nbytes > arena_temp->limit - arena_temp->avail)
         arena_temp = arena_temp->prev;
     if (arena_temp)
         arena = arena_temp;
+    */
 
-    while (nbytes > arena->limit - arena->avail) {
+    //Exercise 6.2
+    // Sort arena and find the bigest one
+    Arena_sort(&arena);
+
+    if (nbytes > arena->limit - arena->avail) {
         T ptr;
         char *limit;
         if ((ptr = freechunks) != NULL) {
