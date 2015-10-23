@@ -56,23 +56,24 @@ static int Arena_compare(const void *arena1, const void *arena2) {
 
 static int Arena_count(T arena) {
     int count = 0;
-    while (arena) {
+    T ptr = arena->prev;
+    while (ptr) {
         ++count;
-        arena = arena->prev;
+        ptr = ptr->prev;
     }
     return count;
 }
 
-static void Arena_sort(T *arena) {
-    int n = Arena_count(*arena);
+static void Arena_sort(T arena) {
+    int n = Arena_count(arena);
     T *arraylist = calloc(n, sizeof(T));
 
-    T ptr = *arena;
+    T ptr = arena;
     for (int i = 0; i < n; ++i, ptr = ptr->prev) {
         arraylist[i] = ptr;
     }
     qsort(arraylist, n, sizeof(T), Arena_compare);
-    *arena = arraylist[0];
+    arena->prev = arraylist[0];
     for (int i = 1; i < n; ++i) {
         arraylist[i - 1]->prev = arraylist[i];
     }
@@ -115,7 +116,7 @@ void * Arena_alloc(T arena, long nbytes, const char *file, int line) {
 
     //Exercise 6.2
     // Sort arena and find the bigest one
-    Arena_sort(&arena);
+    Arena_sort(arena);
 
     if (nbytes > arena->limit - arena->avail) {
         T ptr;
