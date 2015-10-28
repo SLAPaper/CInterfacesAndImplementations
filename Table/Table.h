@@ -3,7 +3,7 @@
 typedef struct Table_T *Table_T ;
 
 //exported functions 84
-Table_T Table_new(int hint, int cmp(const void *x, const void *y), unsigned hash(const void *key));
+Table_T Table_new(int hint, int cmp(const void *x, const void *y), unsigned int hash(const void *key));
 void Table_free(Table_T *table);
 int Table_length(Table_T table);
 void * Table_put(Table_T table, const void *key, void *value);
