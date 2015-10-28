@@ -20,8 +20,8 @@ struct Except_Frame {
 enum { Except_entered = 0, Except_raised, Except_handled, Except_finalized };
 
 //variables 39
-extern Except_Frame *Except_stack;
-extern const Except_T Assert_Failed;
+Except_Frame *Except_stack;
+const Except_T Assert_Failed;
 
 //functions 35
 void Except_raise(const T *e, const char *file, int line);
