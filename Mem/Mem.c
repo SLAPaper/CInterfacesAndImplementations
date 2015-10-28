@@ -47,7 +47,7 @@ void * Mem_resize(void *ptr, long nbytes, const char *file, int line) {
     assert(ptr);
     assert(nbytes > 0);
 
-    ptr = realloc(ptr, nbytes);
+    void *temp = realloc(ptr, nbytes);
     if (ptr == NULL) {
         if (file == NULL)
             RAISE(Mem_Failed);
@@ -55,6 +55,7 @@ void * Mem_resize(void *ptr, long nbytes, const char *file, int line) {
             Except_raise(&Mem_Failed, file, line);
         }
     }
+    ptr = temp;
     return ptr;
 }
 

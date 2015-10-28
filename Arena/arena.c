@@ -66,12 +66,15 @@ static int Arena_count(Arena_T arena) {
 static void Arena_sort(Arena_T arena) {
     int n = Arena_count(arena);
     Arena_T *arraylist = calloc(n, sizeof(Arena_T));
+    if (arraylist == NULL) {
+        RAISE(Arena_Failed);
+    }
 
     Arena_T ptr = arena;
     for (int i = 0; i < n; ++i, ptr = ptr->prev) {
         arraylist[i] = ptr;
     }
-    qsort(arraylist, n, sizeof(T), Arena_compare);
+    qsort(arraylist, n, sizeof(Arena_T), Arena_compare);
     arena->prev = arraylist[0];
     for (int i = 1; i < n; ++i) {
         arraylist[i - 1]->prev = arraylist[i];
