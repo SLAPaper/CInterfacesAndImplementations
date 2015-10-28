@@ -106,4 +106,3 @@ void ** List_toArray(T list, void *end) {
     arraylist[i] = end;
     return arraylist;
 }
-#undef T

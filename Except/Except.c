@@ -29,4 +29,3 @@ void Except_raise(const T *e, const char *file, int line) {
     Except_stack = Except_stack->prev;
     longjmp(p->env, Except_raised);
 }
-#undef T

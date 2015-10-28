@@ -64,5 +64,3 @@ void Stack_free(T *stk) {
     }
     FREE(*stk);
 }
-
-#undef T

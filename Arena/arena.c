@@ -171,5 +171,3 @@ void Arena_free(T arena) {
     assert(arena->limit == NULL);
     assert(arena->avail == NULL);
 }
-
-#undef T
