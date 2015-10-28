@@ -1,6 +1,4 @@
 #pragma once
-#ifndef ATOM_INCLUDED
-#define ATOM_INCLUDED
 
 extern int Atom_length(const char *str);
 extern const char * Atom_new(const char *str, int len);
@@ -17,5 +15,3 @@ extern void Atom_aload(const char *strs[]);
 
 //exercise 3.10
 extern const char * Atom_add(const char *str, int len);
-
-#endif

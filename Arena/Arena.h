@@ -1,6 +1,4 @@
 #pragma once
-#ifndef ARENA_INCLUDED
-#define ARENA_INCLUDED
 #include "../Except/Except.h"
 
 #define T Arena_T
@@ -17,4 +15,3 @@ extern void * Arena_calloc(T arena, long count, long nbytes, const char *file, i
 extern void Arena_free(T arena);
 
 #undef T
-#endif

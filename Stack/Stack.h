@@ -1,6 +1,4 @@
 #pragma once
-#ifndef STACK_INCLUDED
-#define STACK_INCLUDED
 
 #define T Stack_T
 typedef struct T *T;
@@ -12,4 +10,3 @@ extern void * Stack_pop(T stk);
 extern void Stack_free(T *stk);
 
 #undef T
-#endif

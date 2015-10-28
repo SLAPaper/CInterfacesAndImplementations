@@ -1,6 +1,4 @@
 #pragma once
-#ifndef MEM_INCLUDED
-#define MEM_INCLUDED
 
 #include "../Except/Except.h"
 #include <stdio.h>
@@ -26,5 +24,3 @@ extern void Mem_leak(void apply(const void *ptr, long size, const char *file, in
 #define NEW0(p) ((p) = CALLOC(1, (long)sizeof(*(p))))
 #define FREE(ptr) ((void) (Mem_free((ptr), __FILE__, __LINE__), (ptr) = 0))
 #define RESIZE(ptr, nbytes) ((ptr) = Mem_resize((ptr), (nbytes), __FILE__, __LINE__))
-
-#endif

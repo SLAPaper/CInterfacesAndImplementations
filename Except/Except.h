@@ -1,6 +1,4 @@
 #pragma once
-#ifndef EXCEPT_INCLUDED
-#define EXCEPT_INCLUDED
 
 #include <setjmp.h>
 
@@ -71,4 +69,3 @@ void Except_raise(const T *e, const char *file, int line);
 } while (0)
 
 #undef T
-#endif
