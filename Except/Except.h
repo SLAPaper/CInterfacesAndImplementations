@@ -2,11 +2,9 @@
 
 #include <setjmp.h>
 
-#define T Except_T
-
-typedef struct T {
+typedef struct Except_T {
     const char *reason;
-} T;
+} Except_T;
 
 //types 39
 typedef struct Except_Frame Except_Frame;
@@ -15,7 +13,7 @@ struct Except_Frame {
     jmp_buf env;
     const char *file;
     int line;
-    const T *exception;
+    const Except_T *exception;
 };
 enum { Except_entered = 0, Except_raised, Except_handled, Except_finalized };
 
@@ -24,7 +22,7 @@ Except_Frame *Except_stack;
 const Except_T Assert_Failed;
 
 //functions 35
-void Except_raise(const T *e, const char *file, int line);
+void Except_raise(const Except_T *e, const char *file, int line);
 
 //macros 35
 #define RAISE(e) Except_raise(&(e), __FILE__, __LINE__)
@@ -67,5 +65,3 @@ void Except_raise(const T *e, const char *file, int line);
     }\
     if (Except_flag == Except_raised) RERAISE; \
 } while (0)
-
-#undef T

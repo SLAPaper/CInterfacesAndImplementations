@@ -1,12 +1,9 @@
 #pragma once
 
-#define T Stack_T
-typedef struct T *T;
+typedef struct Stack_T *Stack_T;
 
-T Stack_new(void);
-int Stack_empty(T stk);
-void Stack_push(T stk, void *x);
-void * Stack_pop(T stk);
-void Stack_free(T *stk);
-
-#undef T
+Stack_T Stack_new(void);
+int Stack_empty(Stack_T stk);
+void Stack_push(Stack_T stk, void *x);
+void * Stack_pop(Stack_T stk);
+void Stack_free(Stack_T *stk);

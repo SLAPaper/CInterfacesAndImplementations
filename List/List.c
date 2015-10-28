@@ -4,18 +4,16 @@
 #include "../Mem/Mem.h"
 #include "List.h"
 
-#define T List_T
-
-T List_push(T list, void *x) {
-    T p;
+List_T List_push(List_T list, void *x) {
+    List_T p;
     NEW(p);
     p->first = x;
     p->rest = list;
     return p;
 }
 
-T List_list(void *x, ...) {
-    T list, *p = &list;
+List_T List_list(void *x, ...) {
+    List_T list, *p = &list;
 
     va_list ap;
     va_start(ap, x);
@@ -29,16 +27,16 @@ T List_list(void *x, ...) {
     return list;
 }
 
-T List_append(T list, T tail) {
-    T *p = &list;
+List_T List_append(List_T list, List_T tail) {
+    List_T *p = &list;
     while (*p)
         p = &(*p)->rest;
     *p = tail;
     return list;
 }
 
-T List_copy(T list) {
-    T head, *p = &head;
+List_T List_copy(List_T list) {
+    List_T head, *p = &head;
     for (; list; list = list->rest) {
         NEW(*p);
         (*p)->first = list->first;
@@ -48,9 +46,9 @@ T List_copy(T list) {
     return head;
 }
 
-T List_pop(T list, void **x) {
+List_T List_pop(List_T list, void **x) {
     if (list) {
-        T head = list->rest;
+        List_T head = list->rest;
         if (x)
             *x = list->first;
         FREE(list);
@@ -60,8 +58,8 @@ T List_pop(T list, void **x) {
         return list;
 }
 
-T List_reverse(T list) {
-    T head = NULL, next;
+List_T List_reverse(List_T list) {
+    List_T head = NULL, next;
     for (; list; list = next) {
         next = list->rest;
         list->rest = head;
@@ -70,31 +68,31 @@ T List_reverse(T list) {
     return head;
 }
 
-int List_length(T list) {
+int List_length(List_T list) {
     int n;
     for (n = 0; list; list = list->rest)
         ++n;
     return n;
 }
 
-void List_free(T *list) {
+void List_free(List_T *list) {
     assert(list);
 
-    T next;
+    List_T next;
     for (; *list; *list = next) {
         next = (*list)->rest;
         FREE(*list);
     }
 }
 
-void List_map(T list, void apply(void **x, void *cl), void *cl) {
+void List_map(List_T list, void apply(void **x, void *cl), void *cl) {
     assert(apply);
 
     for (; list; list = list->rest)
         apply(&list->first, cl);
 }
 
-void ** List_toArray(T list, void *end) {
+void ** List_toArray(List_T list, void *end) {
     int n = List_length(list);
     void ** arraylist = ALLOC((n + 1) * sizeof(*arraylist));
 

@@ -121,7 +121,7 @@
     <ClInclude Include="Arena.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="arena.c" />
+    <ClCompile Include="Arena.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

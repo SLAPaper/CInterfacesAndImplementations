@@ -20,7 +20,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="arena.c">
+    <ClCompile Include="Arena.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

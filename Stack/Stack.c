@@ -3,10 +3,8 @@
 #include "../Mem/Mem.h"
 #include "Stack.h"
 
-#define T Stack_T
-
 //types 18
-struct T {
+struct Stack_T {
     int count;
     struct elem {
         void *x;
@@ -15,8 +13,8 @@ struct T {
 };
 
 //functions 18
-T Stack_new(void) {
-    T stk;
+Stack_T Stack_new(void) {
+    Stack_T stk;
 
     NEW(stk);
     stk->count = 0;
@@ -24,12 +22,12 @@ T Stack_new(void) {
     return stk;
 }
 
-int Stack_empty(T stk) {
+int Stack_empty(Stack_T stk) {
     assert(stk);
     return stk->count == 0;
 }
 
-void Stack_push(T stk, void *x) {
+void Stack_push(Stack_T stk, void *x) {
     struct elem *t;
 
     assert(stk);
@@ -40,7 +38,7 @@ void Stack_push(T stk, void *x) {
     ++(stk->count);
 }
 
-void * Stack_pop(T stk) {
+void * Stack_pop(Stack_T stk) {
     void *x;
     struct elem *t;
 
@@ -54,7 +52,7 @@ void * Stack_pop(T stk) {
     return x;
 }
 
-void Stack_free(T *stk) {
+void Stack_free(Stack_T *stk) {
     struct elem *t, *u;
 
     assert(stk && *stk);

@@ -3,7 +3,6 @@
 #include "../Assert/Assert.h"
 #include "../Except/Except.h"
 #include "Arena.h"
-#define T Arena_T
 
 const Except_T Arena_NewFailed = { "Arena Creation Failed" };
 const Except_T Arena_Failed = { "Arena Allocation Failed" };
@@ -12,8 +11,8 @@ const Except_T Arena_Failed = { "Arena Allocation Failed" };
 #define THRESHOLD 10
 
 //types 67
-struct T {
-    T prev;
+struct Arena_T {
+    Arena_T prev;
     char *avail;
     char *limit;
 };
@@ -32,19 +31,19 @@ union align {
 };
 
 union header {
-    struct T b;
+    struct Arena_T b;
     union align a;
 };
 
 //data 70
-static T freechunks;
+static Arena_T freechunks;
 static int nfree;
 
 // Exercise 6.2
 // Descend order
 static int Arena_compare(const void *arena1, const void *arena2) {
-    const struct T *arena1_t = arena1;
-    const struct T *arena2_t = arena2;
+    const struct Arena_T *arena1_t = arena1;
+    const struct Arena_T *arena2_t = arena2;
     long long result = arena1_t->avail - arena1_t->limit - (arena2_t->avail - arena2_t->limit);
     if (result > 0)
         return -1;
@@ -54,9 +53,9 @@ static int Arena_compare(const void *arena1, const void *arena2) {
         return 0;
 }
 
-static int Arena_count(T arena) {
+static int Arena_count(Arena_T arena) {
     int count = 0;
-    T ptr = arena->prev;
+    Arena_T ptr = arena->prev;
     while (ptr) {
         ++count;
         ptr = ptr->prev;
@@ -64,11 +63,11 @@ static int Arena_count(T arena) {
     return count;
 }
 
-static void Arena_sort(T arena) {
+static void Arena_sort(Arena_T arena) {
     int n = Arena_count(arena);
-    T *arraylist = calloc(n, sizeof(T));
+    Arena_T *arraylist = calloc(n, sizeof(Arena_T));
 
-    T ptr = arena;
+    Arena_T ptr = arena;
     for (int i = 0; i < n; ++i, ptr = ptr->prev) {
         arraylist[i] = ptr;
     }
@@ -82,8 +81,8 @@ static void Arena_sort(T arena) {
 }
 
 //functions 68
-T Arena_new(void) {
-    T arena = malloc(sizeof(*arena));
+Arena_T Arena_new(void) {
+    Arena_T arena = malloc(sizeof(*arena));
     if (arena == NULL)
         RAISE(Arena_NewFailed);
     arena->prev = NULL;
@@ -91,14 +90,14 @@ T Arena_new(void) {
     return arena;
 }
 
-void Arena_dispose(T *ap) {
+void Arena_dispose(Arena_T *ap) {
     assert(ap && *ap);
     Arena_free(*ap);
     free(*ap);
     *ap = NULL;
 }
 
-void * Arena_alloc(T arena, long nbytes, const char *file, int line) {
+void * Arena_alloc(Arena_T arena, long nbytes, const char *file, int line) {
     assert(arena);
     assert(nbytes > 0);
 
@@ -107,7 +106,7 @@ void * Arena_alloc(T arena, long nbytes, const char *file, int line) {
     // Exercise 6.1
     // Go throgh other arenas
     /*
-    T arena_temp = arena;
+    Arena_T arena_temp = arena;
     while (arena_temp && nbytes > arena_temp->limit - arena_temp->avail)
         arena_temp = arena_temp->prev;
     if (arena_temp)
@@ -119,7 +118,7 @@ void * Arena_alloc(T arena, long nbytes, const char *file, int line) {
     Arena_sort(arena);
 
     if (nbytes > arena->limit - arena->avail) {
-        T ptr;
+        Arena_T ptr;
         char *limit;
         if ((ptr = freechunks) != NULL) {
             freechunks = freechunks->prev;
@@ -146,7 +145,7 @@ void * Arena_alloc(T arena, long nbytes, const char *file, int line) {
     return arena->avail - nbytes;
 }
 
-void * Arena_calloc(T arena, long count, long nbytes, const char *file, int line) {
+void * Arena_calloc(Arena_T arena, long count, long nbytes, const char *file, int line) {
     assert(count > 0);
 
     void *ptr = Arena_alloc(arena, count * nbytes, file, line);
@@ -154,10 +153,10 @@ void * Arena_calloc(T arena, long count, long nbytes, const char *file, int line
     return ptr;
 }
 
-void Arena_free(T arena) {
+void Arena_free(Arena_T arena) {
     assert(arena);
     while (arena->prev) {
-        struct T tmp = *arena->prev;
+        struct Arena_T tmp = *arena->prev;
         if (nfree < THRESHOLD) {
             arena->prev->prev = freechunks;
             freechunks = arena->prev;
