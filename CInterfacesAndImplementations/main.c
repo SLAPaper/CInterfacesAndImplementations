@@ -10,6 +10,37 @@
 #include "../Stack/Stack.h"
 #include "../Table/Table.h"
 
+#define ASSUME_EQUAL(a, b) assert(a == b)
+#define ASSUME_SAME(a, b) assert(&a == &b)
+
+void test_Arith() {
+
+}
+
+void test_Atom() {
+
+}
+
+void test_Except() {
+
+}
+
+void test_Assert() {
+
+}
+
+void test_Mem() {
+
+}
+
+void test_List() {
+
+}
+
+void test_Table() {
+
+}
+
 int main(int argc, char* argv[]) {
     printf("Hello World!\n");
     printf("ÄãºÃ£¬ÊÀ½ç£¡\n");
