@@ -1,10 +1,12 @@
 #include "Atom.h"
+
 #include <string.h>
-#include "../Assert/Assert.h"
 #include <limits.h>
-#include "../Mem/Mem.h"
 #include <stdarg.h>
 #include <stdbool.h>
+
+#include "Assert\Assert.h"
+#include "Mem\Mem.h"
 
 // macros 28
 #define NELEMS(x) ((sizeof(x)) / (sizeof((x)[0])))

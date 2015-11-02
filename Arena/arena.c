@@ -1,8 +1,10 @@
+#include "Arena.h"
+
 #include <stdlib.h>
 #include <string.h>
-#include "../Assert/Assert.h"
-#include "../Except/Except.h"
-#include "Arena.h"
+
+#include "Assert\Assert.h"
+#include "Except\Except.h"
 
 const Except_T Arena_NewFailed = { "Arena Creation Failed" };
 const Except_T Arena_Failed = { "Arena Allocation Failed" };

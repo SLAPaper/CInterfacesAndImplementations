@@ -1,9 +1,11 @@
 #ifndef CHKENABLED
+#include "Mem.h"
+
 #include <stdlib.h>
 #include <stddef.h>
-#include "../Assert/Assert.h"
-#include "../Except/Except.h"
-#include "Mem.h"
+
+#include "Assert\Assert.h"
+#include "Except\Except.h"
 
 //data 54
 const Except_T Mem_Failed = { "Allocation Failed" };

@@ -1,8 +1,10 @@
+#include "List.h"
+
 #include <stdarg.h>
 #include <stddef.h>
-#include "../Assert/Assert.h"
-#include "../Mem/Mem.h"
-#include "List.h"
+
+#include "Assert\Assert.h"
+#include "Mem\Mem.h"
 
 List_T List_push(List_T list, void *x) {
     List_T p;

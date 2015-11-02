@@ -1,9 +1,11 @@
 #ifdef CHKENABLED
-#include <stdlib.h>
-#include <string.h>
-#include "../Assert/Assert.h"
-#include "../Except/Except.h"
 #include "Mem.h"
+
+#include <stdlib.h>
+#include <stddef.h>
+
+#include "Assert\Assert.h"
+#include "Except\Except.h"
 
 //checking types 58
 union align {

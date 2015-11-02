@@ -1,7 +1,8 @@
 #pragma once
 
-#include "../Except/Except.h"
 #include <stdio.h>
+
+#include "Except\Except.h"
 
 //exceptions 51
 const Except_T Mem_Failed;

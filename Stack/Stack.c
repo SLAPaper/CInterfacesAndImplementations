@@ -1,7 +1,9 @@
-#include <stddef.h>
-#include "../Assert/Assert.h"
-#include "../Mem/Mem.h"
 #include "Stack.h"
+
+#include <stddef.h>
+
+#include "Assert\Assert.h"
+#include "Mem\Mem.h"
 
 //types 18
 struct Stack_T {

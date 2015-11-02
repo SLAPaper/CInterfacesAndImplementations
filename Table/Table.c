@@ -1,8 +1,10 @@
+#include "Table.h"
+
 #include <limits.h>
 #include <stddef.h>
-#include "../Mem/Mem.h"
-#include "../Assert/Assert.h"
-#include "Table.h"
+
+#include "Mem\Mem.h"
+#include "Assert\Assert.h"
 
 //types 92
 struct Table_T {

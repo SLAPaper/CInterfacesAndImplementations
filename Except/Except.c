@@ -1,7 +1,9 @@
+#include "Except.h"
+
 #include <stdlib.h>
 #include <stdio.h>
-#include "../Assert/Assert.h"
-#include "Except.h"
+
+#include "Assert\Assert.h"
 
 Except_Frame *Except_Stack = NULL;
 
