@@ -14,10 +14,10 @@
 
 //wf prototypes 90
 void wf(char *name, FILE *fp);
-int first(int c);
-int rest(int c);
-int compare(const void *x, const void *y);
-void vfree(const void *key, void **count, void *cl);
+int wf_first(int c);
+int wf_rest(int c);
+int wf_compare(const void *x, const void *y);
+void wf_vfree(const void *key, void **count, void *cl);
 
 //wf functions 88
 int wf_main(int argc, char *argv[]) {
@@ -39,15 +39,15 @@ int wf_main(int argc, char *argv[]) {
     return EXIT_SUCCESS;
 }
 
-int first(int c) {
+int wf_first(int c) {
     return isalpha(c);
 }
 
-int rest(int c) {
+int wf_rest(int c) {
     return isalpha(c) || c == '_';
 }
 
-int compare(const void *x, const void *y) {
+int wf_compare(const void *x, const void *y) {
     return strcmp(*(char **)x, *(char **)y);
 }
 
@@ -55,7 +55,7 @@ void wf(char *name, FILE *fp) {
     Table_T table = Table_new(0, NULL, NULL);
     char buf[128];
 
-    while (getword(fp, buf, sizeof(buf), first, rest)) {
+    while (getword(fp, buf, sizeof(buf), wf_first, wf_rest)) {
         for (int i = 0; buf[i] != '\0'; ++i) {
             buf[i] = tolower(buf[i]);
         }
@@ -75,17 +75,17 @@ void wf(char *name, FILE *fp) {
     }
     // print the words 90
     void **arraylist = Table_toArray(table, NULL);
-    qsort(arraylist, Table_length(table), 2 * sizeof(*arraylist), compare);
+    qsort(arraylist, Table_length(table), 2 * sizeof(*arraylist), wf_compare);
     for (int i = 0; arraylist[i]; i += 2) {
         printf("%d\t%s\n", *(int *)arraylist[i + 1], (char *)arraylist[i]);
     }
     FREE(arraylist);
 
     // deallocate the entries and table 91
-    Table_map(table, vfree, NULL);
+    Table_map(table, wf_vfree, NULL);
     Table_free(&table);
 }
 
-void vfree(const void *key, void **count, void *cl) {
+void wf_vfree(const void *key, void **count, void *cl) {
     FREE(*count);
 }

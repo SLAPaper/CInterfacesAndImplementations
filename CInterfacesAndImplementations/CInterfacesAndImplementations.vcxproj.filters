@@ -24,6 +24,9 @@
     <ClCompile Include="wf.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="xref.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="getword.h">
