@@ -144,6 +144,7 @@
     <ClCompile Include="xref.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="examples.h" />
     <ClInclude Include="getword.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

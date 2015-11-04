@@ -32,5 +32,8 @@
     <ClInclude Include="getword.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="examples.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

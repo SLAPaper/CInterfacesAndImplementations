@@ -12,6 +12,8 @@
 #include "Table\Table.h"
 #include "Set\Set.h"
 
+#include "examples.h"
+
 #define ASSUME_EQUAL(a, b) assert(a == b)
 #define ASSUME_SAME(a, b) assert(&a == &b)
 
