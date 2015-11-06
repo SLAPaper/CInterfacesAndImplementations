@@ -13,11 +13,11 @@
 #include "getword.h"
 
 //wf prototypes 90
-void wf(char *name, FILE *fp);
-int wf_first(int c);
-int wf_rest(int c);
-int wf_compare(const void *x, const void *y);
-void wf_vfree(const void *key, void **count, void *cl);
+static void wf(char *name, FILE *fp);
+static int wf_first(int c);
+static int wf_rest(int c);
+static int wf_compare(const void *x, const void *y);
+static void wf_vfree(const void *key, void **count, void *cl);
 
 //wf functions 88
 int wf_main(int argc, char *argv[]) {
@@ -39,19 +39,19 @@ int wf_main(int argc, char *argv[]) {
     return EXIT_SUCCESS;
 }
 
-int wf_first(int c) {
+static int wf_first(int c) {
     return isalpha(c);
 }
 
-int wf_rest(int c) {
+static int wf_rest(int c) {
     return isalpha(c) || c == '_';
 }
 
-int wf_compare(const void *x, const void *y) {
+static int wf_compare(const void *x, const void *y) {
     return strcmp(*(char **)x, *(char **)y);
 }
 
-void wf(char *name, FILE *fp) {
+static void wf(char *name, FILE *fp) {
     Table_T table = Table_new(0, NULL, NULL);
     char buf[128];
 
@@ -86,6 +86,6 @@ void wf(char *name, FILE *fp) {
     Table_free(&table);
 }
 
-void wf_vfree(const void *key, void **count, void *cl) {
+static void wf_vfree(const void *key, void **count, void *cl) {
     FREE(*count);
 }

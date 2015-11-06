@@ -11,14 +11,14 @@
 #include "getword.h"
 
 //xref prototypes 104
-int xref_compare(const void *x, const void *y);
-void xref_print(Table_T files);
-int xref_cmpint(const void *x, const void *y);
-void xref(const char *name, FILE *fp, Table_T identifiers);
-int xref_first(int c);
-int xref_rest(int c);
-int xref_intcmp(const void *x, const void *y);
-unsigned int xref_inthash(const void *x);
+static int xref_compare(const void *x, const void *y);
+static void xref_print(Table_T files);
+static int xref_cmpint(const void *x, const void *y);
+static void xref(const char *name, FILE *fp, Table_T identifiers);
+static int xref_first(int c);
+static int xref_rest(int c);
+static int xref_intcmp(const void *x, const void *y);
+static unsigned int xref_inthash(const void *x);
 
 //xref data 105
 int xref_linenum;
@@ -53,11 +53,11 @@ int xref_main(int argc, char *argv[]) {
     return EXIT_SUCCESS;
 }
 
-int xref_compare(const void *x, const void *y) {
+static int xref_compare(const void *x, const void *y) {
     return strcmp(*(char **)x, *(char **)y);
 }
 
-void xref_print(Table_T files) {
+static void xref_print(Table_T files) {
     void **arraylist = Table_toArray(files, NULL);
     qsort(arraylist, Table_length(files), 2 * sizeof(*arraylist), xref_compare);
     for (int i = 0; arraylist[i]; i += 2) {
@@ -76,7 +76,7 @@ void xref_print(Table_T files) {
     FREE(arraylist);
 }
 
-int xref_cmpint(const void *x, const void *y) {
+static int xref_cmpint(const void *x, const void *y) {
     if (**(int **)x < **(int **)y)
         return -1;
     else if (**(int **)x > **(int **)y)
@@ -85,7 +85,7 @@ int xref_cmpint(const void *x, const void *y) {
         return 0;
 }
 
-void xref(const char *name, FILE *fp, Table_T identifiers) {
+static void xref(const char *name, FILE *fp, Table_T identifiers) {
     char buf[128];
 
     if (name == NULL) {
@@ -117,21 +117,21 @@ void xref(const char *name, FILE *fp, Table_T identifiers) {
     }
 }
 
-int xref_first(int c) {
+static int xref_first(int c) {
     if (c == '\n') {
         ++xref_linenum;
     }
     return isalpha(c) || c == '_';
 }
 
-int xref_rest(int c) {
+static int xref_rest(int c) {
     return isalpha(c) || c == '_' || isdigit(c);
 }
 
-int xref_intcmp(const void *x, const void *y) {
+static int xref_intcmp(const void *x, const void *y) {
     return xref_cmpint(&x, &y);
 }
 
-unsigned int xref_inthash(const void *x) {
+static unsigned int xref_inthash(const void *x) {
     return *(int *)x;
 }
