@@ -227,3 +227,88 @@ Set_T Set_inter(Set_T s, Set_T t) {
     }
 }
 
+Set_T Set_minus(Set_T t, Set_T s) {
+    if (t == NULL) {
+        assert(s);
+        return Set_new(s->size, s->cmp, s->hash);
+    }
+    else if (s == NULL) {
+        return copy(t, t->size);
+    }
+    else {
+        assert(s->cmp == t->cmp && s->hash == t->hash);
+        Set_T set = Set_new(Arith_min(s->size, t->size), s->cmp, s->hash);
+        //for each member p in t 112
+        for (int i = 0; i < t->size; ++i) {
+            for (struct member *p = t->buckets[i]; p; p = p->link) {
+                if (!Set_member(s, p->member)) {
+                    //add p->member to set 112
+                    const void *member = p->member;
+                    int j = set->hash(member) % set->size;
+                    //add member to set 109
+                    struct member *q;
+                    NEW(q);
+                    q->member = member;
+                    q->link = set->buckets[j];
+                    set->buckets[j] = q;
+                    ++set->length;
+                }
+            }
+        }
+        return set;
+    }
+}
+
+Set_T Set_diff(Set_T s, Set_T t) {
+    if (s == NULL) {
+        assert(t);
+        return copy(t, t->size);
+    }
+    else if (t == NULL) {
+        return copy(s, s->size);
+    }
+    else {
+        assert(s->cmp == t->cmp && s->hash == t->hash);
+        Set_T set = Set_new(Arith_min(s->size, t->size), s->cmp, s->hash);
+        //for each member p in t 112
+        for (int i = 0; i < t->size; ++i) {
+            for (struct member *p = t->buckets[i]; p; p = p->link) {
+                if (!Set_member(s, p->member)) {
+                    //add p->member to set 112
+                    const void *member = p->member;
+                    int j = set->hash(member) % set->size;
+                    //add member to set 109
+                    struct member *q;
+                    NEW(q);
+                    q->member = member;
+                    q->link = set->buckets[j];
+                    set->buckets[j] = q;
+                    ++set->length;
+                }
+            }
+        }
+        {
+            Set_T u = t;
+            t = s;
+            s = u;
+        }
+        //for each member p in t 112
+        for (int i = 0; i < t->size; ++i) {
+            for (struct member *p = t->buckets[i]; p; p = p->link) {
+                if (!Set_member(s, p->member)) {
+                    //add p->member to set 112
+                    const void *member = p->member;
+                    int j = set->hash(member) % set->size;
+                    //add member to set 109
+                    struct member *q;
+                    NEW(q);
+                    q->member = member;
+                    q->link = set->buckets[j];
+                    set->buckets[j] = q;
+                    ++set->length;
+                }
+            }
+        }
+        return set;
+    }
+}
