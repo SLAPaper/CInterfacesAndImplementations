@@ -11,6 +11,7 @@
 #include "Stack\Stack.h"
 #include "Table\Table.h"
 #include "Set\Set.h"
+#include "Array\Array.h"
 
 #include "examples.h"
 
@@ -42,6 +43,14 @@ void test_List() {
 }
 
 void test_Table() {
+
+}
+
+void test_Set() {
+
+}
+
+void test_Array() {
 
 }
 
