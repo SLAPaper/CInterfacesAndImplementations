@@ -123,6 +123,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Array.h" />
+    <ClInclude Include="ArrayRep.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Array.cpp" />
