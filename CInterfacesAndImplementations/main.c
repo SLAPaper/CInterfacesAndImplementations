@@ -12,6 +12,7 @@
 #include "Table\Table.h"
 #include "Set\Set.h"
 #include "Array\Array.h"
+#include "Seq\Seq.h"
 
 #include "examples.h"
 
@@ -51,6 +52,10 @@ void test_Set() {
 }
 
 void test_Array() {
+
+}
+
+void test_Seq() {
 
 }
 
