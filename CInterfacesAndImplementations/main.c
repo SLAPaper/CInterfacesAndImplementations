@@ -13,6 +13,7 @@
 #include "Set\Set.h"
 #include "Array\Array.h"
 #include "Seq\Seq.h"
+#include "Ring\Ring.h"
 
 #include "examples.h"
 
@@ -56,6 +57,10 @@ void test_Array() {
 }
 
 void test_Seq() {
+
+}
+
+void test_Ring() {
 
 }
 
