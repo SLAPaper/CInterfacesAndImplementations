@@ -74,6 +74,7 @@ int wf_main(int argc, char *argv[]);
 int main(int argc, char* argv[]) {
     printf("Hello World!\n");
     printf("ÄãºÃ£¬ÊÀ½ç£¡\n");
+    printf("%llu %llu %llu\n", sizeof(unsigned int), sizeof(unsigned long), sizeof(void *));
     system("pause");
     return 0;
 }
