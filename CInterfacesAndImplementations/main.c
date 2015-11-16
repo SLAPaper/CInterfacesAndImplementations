@@ -14,6 +14,7 @@
 #include "Array\Array.h"
 #include "Seq\Seq.h"
 #include "Ring\Ring.h"
+#include "Bit\Bit.h"
 
 #include "examples.h"
 
@@ -61,6 +62,10 @@ void test_Seq() {
 }
 
 void test_Ring() {
+
+}
+
+void test_Bit() {
 
 }
 

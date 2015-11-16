@@ -42,6 +42,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Seq", "Seq\Seq.vcxproj", "{
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Ring", "Ring\Ring.vcxproj", "{07A6EE15-6153-4285-B5B9-FFE316508173}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Bit", "Bit\Bit.vcxproj", "{517BFA0E-4366-40B8-90AB-DC7E6DB3D342}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -162,6 +164,14 @@ Global
 		{07A6EE15-6153-4285-B5B9-FFE316508173}.Release|x64.Build.0 = Release|x64
 		{07A6EE15-6153-4285-B5B9-FFE316508173}.Release|x86.ActiveCfg = Release|Win32
 		{07A6EE15-6153-4285-B5B9-FFE316508173}.Release|x86.Build.0 = Release|Win32
+		{517BFA0E-4366-40B8-90AB-DC7E6DB3D342}.Debug|x64.ActiveCfg = Debug|x64
+		{517BFA0E-4366-40B8-90AB-DC7E6DB3D342}.Debug|x64.Build.0 = Debug|x64
+		{517BFA0E-4366-40B8-90AB-DC7E6DB3D342}.Debug|x86.ActiveCfg = Debug|Win32
+		{517BFA0E-4366-40B8-90AB-DC7E6DB3D342}.Debug|x86.Build.0 = Debug|Win32
+		{517BFA0E-4366-40B8-90AB-DC7E6DB3D342}.Release|x64.ActiveCfg = Release|x64
+		{517BFA0E-4366-40B8-90AB-DC7E6DB3D342}.Release|x64.Build.0 = Release|x64
+		{517BFA0E-4366-40B8-90AB-DC7E6DB3D342}.Release|x86.ActiveCfg = Release|Win32
+		{517BFA0E-4366-40B8-90AB-DC7E6DB3D342}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
